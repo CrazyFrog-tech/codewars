@@ -1,6 +1,5 @@
 
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +22,7 @@ class MainTest {
                 {11, 8}};
 
         int[][] actual = Main.matrixMultiplication(a, b);
-        Assert.assertArrayEquals(expected, actual);
+        assertArrayEquals(expected, actual);
     }
 
     @Test
@@ -43,7 +42,7 @@ class MainTest {
                     { 4, 12 }};
 
             int[][] actual = Main.matrixMultiplication(a, b);
-            Assert.assertArrayEquals(expected, actual);
+            assertArrayEquals(expected, actual);
         }
 
         {
@@ -64,7 +63,7 @@ class MainTest {
                     { 26, 33, 31 }};
 
             int[][] actual = Main.matrixMultiplication(a, b);
-            Assert.assertArrayEquals(expected, actual);
+            assertArrayEquals(expected, actual);
         }
     }
 
