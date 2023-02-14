@@ -1,5 +1,8 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -9,21 +12,28 @@ public class Main {
     }
 
     public static int longestSlideDown(int[][] pyramid) {
-        int sum = pyramid[0][0];
-        int index = 0;
-
-        for (int i = 1; i < pyramid.length; i++) {
-            if(pyramid[i][index + 1] > pyramid[i][index] ){
-                index = index + 1;
-
+        List<Integer> newSlideDownRow = new ArrayList<>();
+        List<Integer> tempSlideDown = new ArrayList<>();
+        newSlideDownRow = Arrays.stream(pyramid[pyramid.length-1]).boxed().collect(Collectors.toList());
+        for (int i = pyramid.length -2; i >= 0 ; i--) {
+            for (int j = 0; j < pyramid[i].length; j++) {
+                int temMaxTotal = getBiggerSum(pyramid[i][j], newSlideDownRow.get(j), newSlideDownRow.get(j+1));
+                tempSlideDown.add(temMaxTotal);
             }
-             sum += pyramid[i][index];
+            newSlideDownRow.removeAll(newSlideDownRow);
+            newSlideDownRow.addAll(tempSlideDown);
+            tempSlideDown.removeAll(tempSlideDown);
+
+
 
         }
-
-
-        return sum;
+        return newSlideDownRow.get(0);
         // Code Goes Here..
+    }
+
+    private static int getBiggerSum(int number, int index1, int index2){
+        return number + Math.max(index1, index2);
+
     }
 
 }
