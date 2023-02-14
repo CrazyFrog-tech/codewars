@@ -11,29 +11,29 @@ public class Main {
 
     }
 
-    public static int longestSlideDown(int[][] pyramid) {
-        List<Integer> newSlideDownRow = new ArrayList<>();
-        List<Integer> tempSlideDown = new ArrayList<>();
-        newSlideDownRow = Arrays.stream(pyramid[pyramid.length-1]).boxed().collect(Collectors.toList());
-        for (int i = pyramid.length -2; i >= 0 ; i--) {
-            for (int j = 0; j < pyramid[i].length; j++) {
-                int temMaxTotal = getBiggerSum(pyramid[i][j], newSlideDownRow.get(j), newSlideDownRow.get(j+1));
-                tempSlideDown.add(temMaxTotal);
-            }
-            newSlideDownRow.removeAll(newSlideDownRow);
-            newSlideDownRow.addAll(tempSlideDown);
-            tempSlideDown.removeAll(tempSlideDown);
-
-
-
-        }
-        return newSlideDownRow.get(0);
-        // Code Goes Here..
+    public static int isInteresting(int number, int[] awesomePhrases) {
+        int interesting = 0;
+        interesting += getNumberInteresting(number);
+        interesting += getNumberNearingInteresting(number, awesomePhrases);
+        return interesting;
     }
 
-    private static int getBiggerSum(int number, int index1, int index2){
-        return number + Math.max(index1, index2);
+    private static int getNumberNearingInteresting(int number, int[] awesomePhrases) {
+        for (int i = 0; i < awesomePhrases.length-1; i++) {
+            if(number + 1 == awesomePhrases[i] || number + 2 == awesomePhrases[i]) {
+                return 1;
+            }
+        }
+        return 0;
+    }
 
+    private static int getNumberInteresting(int number) {
+        if(number % 100 == 0){
+            return 2;
+        }
+
+
+        return 0;
     }
 
 }
