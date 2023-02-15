@@ -1,9 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class Main {
 
     // Driver code
@@ -28,9 +22,10 @@ public class Main {
     }
 
     private static int getNumberInteresting(int number) {
-        if(number % 100 == 0){
+        if(number % 100 == 0 && number > 99){
             return 2;
         }
+        // for incremental decremental convert to string and check each digit if it's smaller than the next one or greater.
 
 
         return 0;
