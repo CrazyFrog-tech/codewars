@@ -1,35 +1,18 @@
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.internal.junit.ArrayAsserts.assertArrayEquals;
 
 import org.junit.jupiter.api.Test;
 
 class MainTest {
     @Test
-    public void testTooSmall() {
-        assertEquals(0, Main.isInteresting(3, new int[]{1337, 256}));
+    public void initialTests() {
+        assertArrayEquals(new int[] {4, 3, 2, 1,0}, Main.smaller(new int[] {5,4,3,2,1}));
+        assertArrayEquals(new int[] {0,0,0}, Main.smaller(new int[] {1,2,3}));
+        assertArrayEquals(new int[] {1,1,0}, Main.smaller(new int[] {1,2,0}));
+        assertArrayEquals(new int[] {0,1,0}, Main.smaller(new int[] {1,2,1}));
+        assertArrayEquals(new int[] {3,3,0,0,0}, Main.smaller(new int[] {1,1,-1,0,0}));
+        assertArrayEquals(new int[] {4, 1, 5, 5, 0, 0, 0, 0, 0}, Main.smaller(new int[] {5, 4, 7, 9, 2, 4, 4, 5, 6}));
+        assertArrayEquals(new int[] {5, 2, 6, 6, 1, 1, 0, 0, 0, 0}, Main.smaller(new int[] {5, 4, 7, 9, 2, 4, 1, 4, 5, 6}));
     }
-
-    @Test
-    public void testAlmostAwesome() {
-        assertEquals(1, Main.isInteresting(1336, new int[]{1337, 256}));
-    }
-
-    @Test
-    public void testAwesome() {
-        assertEquals(2, Main.isInteresting(1337, new int[]{1337, 256}));
-    }
-
-    @Test
-    public void testFarNotInteresting() {
-        assertEquals(0, Main.isInteresting(11208, new int[]{1337, 256}));
-    }
-
-    @Test
-    public void testAlmostInteresting() {
-        assertEquals(1, Main.isInteresting(11209, new int[]{1337, 256}));
-    }
-
-    @Test
-    public void testInteresting() {
-        assertEquals(2, Main.isInteresting(11211, new int[]{1337, 256}));
-    }
+    
 }
