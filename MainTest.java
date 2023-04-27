@@ -1,7 +1,7 @@
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.internal.junit.ArrayAsserts.assertArrayEquals;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+
 
 class MainTest {
     @Test
