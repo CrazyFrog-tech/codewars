@@ -1,77 +1,68 @@
-import java.util.Arrays;
-import java.util.Collections;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.*;
 import java.util.stream.IntStream;
+
 
 public class Main {
 
+    private static List<Integer> sortedList = new ArrayList<>();
+
     // Driver code
-    public static void main(String[] args) {
+    public static int[] snail(int[][] array) {
+        int horizontalIndex = 0;
+        int verticalIndex = 0;
 
-    }
-
-    public static int[] smaller(int[] unsorted) {
-        int[] counts = new int[unsorted.length];
-        int[] indexes = new int[unsorted.length];
-
-        // initialize indexes
-        for (int i = 0; i < indexes.length; i++) {
-            indexes[i] = i;
-        }
-
-        mergeSort(unsorted, indexes, counts, 0, unsorted.length - 1);
-
-        return counts;
-    }
-
-    private static void mergeSort(int[] arr, int[] indexes, int[] counts, int left, int right) {
-        if (left >= right) {
-            return;
-        }
-
-        int mid = left + (right - left) / 2;
-        mergeSort(arr, indexes, counts, left, mid);
-        mergeSort(arr, indexes, counts, mid + 1, right);
-        merge(arr, indexes, counts, left, mid, right);
-    }
-
-    private static void merge(int[] arr, int[] indexes, int[] counts, int left, int mid, int right) {
-        int i = left;
-        int j = mid + 1;
-        int k = 0;
-        int[] temp = new int[right - left + 1];
-        int[] tempindexes = new int[right - left + 1];
-
-        while (i <= mid && j <= right) {
-            if (arr[i] <= arr[j]) {
-                temp[k] = arr[i];
-                tempindexes[k] = indexes[i];
-                counts[indexes[i]] += j - mid - 1;
-                i++;
-            } else {
-                temp[k] = arr[j];
-                tempindexes[k] = indexes[j];
-                j++;
+        int verticalArrayLength = array.length;
+        int totalSize = array.length * array[0].length;
+        boolean firstTime = false;
+        for (int rowNumber = verticalIndex; rowNumber < verticalArrayLength; rowNumber++) {
+            if(rowNumber > 0){
+                firstTime = true;
             }
-            k++;
-        }
+            int horizontalArrayLength = array[rowNumber].length;
+            for (int columnNumber = horizontalIndex; columnNumber < horizontalArrayLength; columnNumber++) {
+                int number = array[rowNumber][columnNumber];
+                int horizontalArraySize = horizontalArrayLength - 1;
+                int verticalArraySize = verticalArrayLength - 1;
 
-        while (i <= mid) {
-            temp[k] = arr[i];
-            tempindexes[k] = indexes[i];
-            counts[indexes[i]] += j - mid - 1;
-            i++;
-            k++;
-        }
+                if (!sortedList.contains(number)) {
+                    sortedList.add(number);
+                    if (columnNumber == horizontalArraySize) {
+                        horizontalIndex = columnNumber;
+                    }
+                }
+                if (rowNumber == verticalArraySize && columnNumber !=0) {
+                    horizontalIndex= columnNumber-1;
+                    rowNumber--;
 
-        while (j <= right) {
-            temp[k] = arr[j];
-            tempindexes[k] = indexes[j];
-            j++;
-            k++;
-        }
+                }
+                if (columnNumber == 0 && firstTime) {
+                    rowNumber= rowNumber-1;
 
-        System.arraycopy(temp, 0, arr, left, temp.length);
-        System.arraycopy(tempindexes, 0, indexes, left, tempindexes.length);
+                    verticalIndex = rowNumber;
+                    horizontalIndex = 0;
+                    columnNumber = -1;
+                    firstTime = false;
+                }
+                if(sortedList.size() == totalSize){
+                    break;
+                }
+            }
+            if(sortedList.size() == totalSize){
+                break;
+            }
+
+        }
+        // enjoy
+        return sortedList.stream().mapToInt(i -> i).toArray();
     }
 
+    public static void goRight(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            sortedList.add(i);
+
+        }
+    }
 }
+
