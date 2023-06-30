@@ -19,7 +19,7 @@ public class Main {
         int totalSize = array.length * array[0].length;
         boolean firstTime = false;
         for (int rowNumber = verticalIndex; rowNumber < verticalArrayLength; rowNumber++) {
-            if(rowNumber > 0){
+            if (rowNumber > 0) {
                 firstTime = true;
             }
             int horizontalArrayLength = array[rowNumber].length;
@@ -38,24 +38,24 @@ public class Main {
                         horizontalIndex = columnNumber;
                     }
                 }
-                if (rowNumber == verticalArraySize && columnNumber !=0) {
-                    horizontalIndex= columnNumber-1;
+                if (rowNumber == verticalArraySize && columnNumber != 0) {
+                    horizontalIndex = columnNumber - 1;
                     rowNumber--;
 
                 }
                 if (columnNumber == 0 && firstTime) {
-                    rowNumber= rowNumber-1;
+                    rowNumber = rowNumber - 1;
 
                     verticalIndex = rowNumber;
                     horizontalIndex = 0;
                     columnNumber = -1;
                     firstTime = false;
                 }
-                if(sortedList.size() == totalSize){
+                if (sortedList.size() == totalSize) {
                     break;
                 }
             }
-            if(sortedList.size() == totalSize){
+            if (sortedList.size() == totalSize) {
                 break;
             }
 
@@ -64,11 +64,6 @@ public class Main {
         return sortedList.stream().mapToInt(i -> i).toArray();
     }
 
-    public static void goRight(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            sortedList.add(i);
-
-        }
-    }
+}
 }
 
