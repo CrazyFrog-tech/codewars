@@ -7,6 +7,8 @@ import java.util.stream.IntStream;
 public class Main {
 
     private static List<Integer> sortedList = new ArrayList<>();
+    private static List<Integer> keysList = new ArrayList<>();
+
 
     // Driver code
     public static int[] snail(int[][] array) {
@@ -25,9 +27,13 @@ public class Main {
                 int number = array[rowNumber][columnNumber];
                 int horizontalArraySize = horizontalArrayLength - 1;
                 int verticalArraySize = verticalArrayLength - 1;
+                String key = "" + rowNumber + columnNumber;
+                int keyInt = Integer.parseInt(key);
 
-                if (!sortedList.contains(number)) {
+                if (
+                        !keysList.contains(keyInt)) {
                     sortedList.add(number);
+                    keysList.add(keyInt);
                     if (columnNumber == horizontalArraySize) {
                         horizontalIndex = columnNumber;
                     }
