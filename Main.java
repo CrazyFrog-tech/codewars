@@ -12,6 +12,10 @@ public class Main {
 
     // Driver code
     public static int[] snail(int[][] array) {
+        boolean goingRight = false;
+        boolean goingLeft = false;
+        boolean goingDown =false;
+        boolean goingUp = false;
         int horizontalIndex = 0;
         int verticalIndex = 0;
 
@@ -34,22 +38,42 @@ public class Main {
                         !keysList.contains(keyInt)) {
                     sortedList.add(number);
                     keysList.add(keyInt);
-                    if (columnNumber == horizontalArraySize) {
+
+                }
+                if (columnNumber == horizontalArraySize || !keysList.contains(keyInt)) {
+
+                    if(columnNumber == horizontalArraySize){
                         horizontalIndex = columnNumber;
+                    }else {
+                        horizontalIndex = 0;
                     }
+                    columnNumber = horizontalArraySize;
+                    if(keysList.contains(keyInt)){
+                        horizontalIndex =0;
+                    }
+
                 }
                 if (rowNumber == verticalArraySize && columnNumber != 0) {
                     horizontalIndex = columnNumber - 1;
                     rowNumber--;
+                    break;
 
                 }
                 if (columnNumber == 0 && firstTime) {
-                    rowNumber = rowNumber - 1;
 
-                    verticalIndex = rowNumber;
-                    horizontalIndex = 0;
-                    columnNumber = -1;
-                    firstTime = false;
+                    int newRowNumber = rowNumber - 2;
+                    int rownumberGood = rowNumber - 1;
+                    String key1 = "" + rownumberGood + columnNumber;
+                    int keyInt1 = Integer.parseInt(key1);
+                    if(!keysList.contains(keyInt1)){
+                        rowNumber = newRowNumber;
+                        verticalIndex = rowNumber;
+                        horizontalIndex = 0;
+                        firstTime = false;
+                        break;
+                    }
+
+
                 }
                 if (sortedList.size() == totalSize) {
                     break;
